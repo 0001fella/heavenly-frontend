@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Global Styles */
+
+/* Smooth Transitions for Interactive Elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a,
+button {
+  transition: all 0.3s ease;
+}
+
+/* Gradient Background and Typography */
+body {
+  background: linear-gradient(to bottom, #0a0a0a, #1a1a2e); /* Darker gradient */
+  color: #eaeaea; /* Soft white for text */
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f4a261;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f39c12;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 10px;
+}
+
+/* Header */
+header {
+  background-color: rgba(10, 10, 10, 0.85);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid #f8e71c;
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f8e71c;
+}
+
+/* Hover effect on links */
+a:hover {
+  color: #f8e71c;
+}
+
+/* Buttons */
+button {
+  background-color: #f8e71c;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #f39c12;
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #f8e71c;
+}
+
+.button-secondary {
+  background-color: #0077ff;
+  color: white;
+}
+
+.button-secondary:hover {
+  background-color: #005bb5;
+}
+
+/* Hero Section */
+.hero {
+  background-image: url('path_to_your_image.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #f8e71c;
+  text-shadow: 2px 2px 10px #000;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  color: #eaeaea;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+/* Footer */
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 2rem 0;
+  color: white;
+  text-align: center;
+}
+
+footer p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Services Section */
+.services {
+  background-color: #1e1e1e;
+  padding: 4rem 0;
+}
+
+.services h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: #f8e71c;
+}
+
+.services p {
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background-color: #333;
+  padding: 4rem 0;
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: #f8e71c;
+}
+
+/* Gallery Section */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 4rem 0;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Contact Section */
+.contact-form {
+  background-color: #1e1e1e;
+  padding: 4rem 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  background-color: #f8e71c;
+  color: black;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #f39c12;
+}

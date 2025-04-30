@@ -1,0 +1,111 @@
+/* Booking.css */
+.booking-section {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 4rem 2rem;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.booking-form {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 700px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.booking-form:hover {
+  transform: scale(1.02);
+}
+
+.booking-form input,
+.booking-form select {
+  background-color: transparent;
+  border: 2px solid #ccc;
+  padding: 1rem;
+  color: #333;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  border-color: #ffdd57;
+  outline: none;
+}
+
+.booking-form button {
+  background: linear-gradient(135deg, #ffdd57, #f6b50d);
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.booking-form button:hover {
+  transform: scale(1.05);
+}
+
+.payment-methods {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+.payment-card {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.payment-card:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.payment-card img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .booking-section {
+    padding: 3rem 1rem;
+  }
+
+  .booking-form {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .payment-methods {
+    flex-direction: column;
+    align-items: center;
+  }
+}

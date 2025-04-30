@@ -1,0 +1,46 @@
+/* Contact.css */
+
+/* Contact Page Styles */
+#contact {
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(51,51,51,0.7));
+  }
+  
+  #contact h2 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  }
+  
+  #contact p {
+    font-size: 1.125rem;
+  }
+  
+  .contact-info div {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .contact-info div:hover {
+    transform: scale(1.05);
+  }
+  
+  form input,
+  form textarea {
+    border-radius: 10px;
+    border: 1px solid #444;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  form input:focus,
+  form textarea:focus {
+    border-color: #ffdd57;
+    box-shadow: 0 0 5px rgba(255, 221, 87, 0.8);
+  }
+  
+  button:hover {
+    background-color: #ffd100;
+  }
+  
+  footer p {
+    font-size: 0.875rem;
+    color: #bbb;
+  }
+  
