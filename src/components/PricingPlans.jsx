@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { backendURL } from "../config";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaPhoneAlt, FaPaypal, FaUniversity, FaSpinner, FaSun, FaMoon } from "react-icons/fa";
@@ -58,7 +59,7 @@ const PricingPlans = () => {
 
   const checkPaymentStatus = async (paymentId) => {
     try {
-      const response = await axios.get(`https://7130-102-0-18-168.ngrok-free.app/api/payments/${paymentId}`);
+      const response = await axios.get(`https://heavenly-backend.onrender.com/api/payments/${paymentId}`);
       return response.data;
     } catch (error) {
       console.error("Error checking payment status:", error);
@@ -79,7 +80,7 @@ const PricingPlans = () => {
       };
 
       const response = await axios.post(
-        "https://7130-102-0-18-168.ngrok-free.app/api/payments/initiate",
+        "https://heavenly-backend.onrender.com/api/payments/initiate",
         payload
       );
 

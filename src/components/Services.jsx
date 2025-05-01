@@ -1,4 +1,5 @@
 import React from 'react';
+import { backendURL } from "../config";
 import { motion } from 'framer-motion';
 import { FaMicrophoneAlt, FaHeadphonesAlt, FaMusic } from 'react-icons/fa';
 

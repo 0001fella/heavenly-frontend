@@ -1,4 +1,5 @@
 import React from 'react';
+import { backendURL } from "../config";
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 function Contact() {

@@ -10,19 +10,20 @@ function MusicPlayer() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  // Environment variable handling for both Vite and CRA
+  // Ensure YouTube API Key is correctly handled
   const youtubeAPIKey = import.meta.env.VITE_YOUTUBE_API_KEY || process.env.REACT_APP_YOUTUBE_API_KEY;
+
+  if (!youtubeAPIKey) {
+    console.error('YouTube API Key is missing!');
+  }
 
   const tags = ['All', 'Worship', 'Praise', 'Choir', 'Live', 'Instrumental'];
 
   useEffect(() => {
-    if (!youtubeAPIKey) {
-      console.error('Missing YouTube API Key!');
-      setLoading(false);
-      return;
-    }
+    if (!youtubeAPIKey) return;
+
     fetchInitialVideos();
-  }, [youtubeAPIKey]); // Added dependency
+  }, [youtubeAPIKey]);
 
   const fetchInitialVideos = async () => {
     setLoading(true);
@@ -53,8 +54,9 @@ function MusicPlayer() {
       }
 
       setVideos(allVideos);
+      console.log('Fetched initial videos:', allVideos);
     } catch (error) {
-      console.error('Error fetching videos:', error);
+      console.error('Error fetching initial videos:', error);
     } finally {
       setLoading(false);
     }
@@ -82,6 +84,7 @@ function MusicPlayer() {
       }));
 
       setVideos(fetchedVideos);
+      console.log('Fetched videos from search:', fetchedVideos);
     } catch (error) {
       console.error('Error fetching videos:', error);
     } finally {
@@ -158,11 +161,7 @@ function MusicPlayer() {
           <button
             key={index}
             onClick={() => handleTagClick(tag)}
-            className={`px-4 py-2 rounded-full ${
-              filterTag === tag
-                ? 'bg-yellow-400 text-black'
-                : 'bg-gray-300 text-black hover:bg-yellow-200'
-            } transition`}
+            className={`px-4 py-2 rounded-full ${filterTag === tag ? 'bg-yellow-400 text-black' : 'bg-gray-300 text-black hover:bg-yellow-200'} transition`}
           >
             {tag}
           </button>
@@ -179,9 +178,7 @@ function MusicPlayer() {
           {videos.map((video, index) => (
             <div
               key={index}
-              className={`cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transform transition ${
-                index === currentVideoIndex ? 'border-4 border-yellow-400' : ''
-              }`}
+              className={`cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transform transition ${index === currentVideoIndex ? 'border-4 border-yellow-400' : ''}`}
               onClick={() => playVideo(index)}
             >
               <img

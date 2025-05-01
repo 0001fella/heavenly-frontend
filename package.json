@@ -1,23 +1,19 @@
 {
-  "name": "heavenly-rhythms",
-  "version": "0.0.1",
+  "name": "heavenly-frontend",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "vite"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
     "@vitejs/plugin-react": "^4.4.1",
     "aos": "^2.3.4",
     "axios": "^1.9.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
     "framer-motion": "^12.7.4",
     "lucide-react": "^0.501.0",
-    "mongoose": "^8.13.2",
     "qrcode.react": "^4.2.0",
     "react": "^18.0.0",
     "react-calendar": "^5.1.0",

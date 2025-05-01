@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heavenly Rhythms</title>
+
+    <!-- Prevent Dark Mode Flicker -->
+    <script>
+      (function () {
+        const theme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (theme === "dark" || (!theme && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <!-- Add Marquee Animation Styles -->
+    <style>
+      .marquee-wrapper {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+
+      .marquee-content {
+        display: flex;
+        white-space: nowrap;
+        animation: marquee 10s linear infinite;
+      }
+
+      .marquee-content p {
+        margin-right: 2rem; /* Add space between items */
+        font-size: 1.5rem;
+        color: #00aaff; /* Change to your desired text color */
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-C4oe9m9v.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-7Z9VaBwG.css">
+  </head>
+
+  <body class="bg-black text-white">
+    <div id="root"></div>
+
+    <!-- Marquee Section in HTML -->
+    <div class="marquee-wrapper">
+      <div class="marquee-content">
+        <p>Bildad Ogweno is the visionary and heart behind Heavenly Rhythms Studio. With a passion for creating quality gospel music, he has built a space where artists can truly thrive and glorify God through their music.</p>
+        <p>Bildad Ogweno's vision is not only to create music but to foster a community where creativity meets purpose, all while maintaining the highest standards of sound and production.</p>
+        <p>With years of experience, Bildad is dedicated to ensuring that every artist who steps into Heavenly Rhythms Studio leaves with a polished sound that speaks volumes.</p>
+      </div>
+    </div>
+
+  </body>
+</html>

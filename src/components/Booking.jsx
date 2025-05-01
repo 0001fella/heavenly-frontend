@@ -1,3 +1,4 @@
+import { backendURL } from "../config";
 import React, { useState } from "react";
 import "./Booking.css";
 
@@ -27,12 +28,15 @@ const Booking = () => {
       console.log("📌 Booking Data Submitted:", formData);
 
       // Send booking data to the backend
-      await fetch("http://localhost:5002/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
+      const apiUrl = import.meta.env.VITE_API_URL;
+      fetch(`${apiUrl}/bookings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      
       alert("✅ Booking successful!");
 
       // Reset form
