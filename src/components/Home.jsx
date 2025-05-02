@@ -1,118 +1,146 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaPlay } from "react-icons/fa";
 
-// Components
-import Hero from "./Hero";
-import About from "./About";
-import Services from "./Services";
-import Gallery from "./Gallery";
-import Testimonials from "./Testimonials";
-import Booking from "./Booking";
-import MusicPlayer from "./MusicPlayer";
-import Contact from "./Contact";
-
-const Homepage = () => {
+function HomePage() {
   return (
-    <>
+    <div className="bg-gradient-to-b from-black via-gray-900 to-blue-900 min-h-screen text-white overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative bg-black text-white overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed opacity-60"
-          style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-        ></div>
-
-        <div className="relative z-10 max-w-7xl mx-auto text-center py-20 px-4 md:px-8">
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <img
-              src="/Logo.png"
-              alt="Heavenly Rhythms Logo"
-              className="h-24 w-auto object-contain drop-shadow-lg"
-            />
-          </div>
-
-          <h1 className="text-5xl font-extrabold mb-4 text-white">
+      <section className="flex flex-col justify-center items-center text-center py-24 px-6">
+        <motion.div
+          className="max-w-6xl mx-auto text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
             Welcome to Heavenly Rhythms
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
-            Where music meets creativity and innovation
+          <p className="text-base sm:text-lg mb-6 text-blue-200">
+            Discover a space where music, creativity, and divine inspiration come together.
           </p>
-          <Link to="#about">
-            <button className="bg-yellow-400 text-black py-2 px-6 rounded-lg hover:bg-yellow-500 transition duration-300">
-              Learn More
-            </button>
+          <Link
+            to="/pricing"
+            className="bg-yellow-400 text-black text-lg py-3 px-8 rounded-full hover:bg-yellow-500 transition"
+          >
+            Book Now
           </Link>
-        </div>
+        </motion.div>
       </section>
 
-      {/* About Section */}
-      <About />
-
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-extrabold mb-12 text-yellow-400">
-            Our Services
+      {/* Featured Services */}
+      <section className="py-24 bg-gray-800">
+        <motion.div
+          className="max-w-6xl mx-auto text-center px-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-14 text-yellow-400">
+            Our Featured Services
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="service-card p-6 bg-gray-800 rounded-lg hover:scale-105 transition-transform duration-300">
-              <h3 className="text-2xl font-semibold mb-4">Music Production</h3>
-              <p className="text-gray-300">
-                High-quality music production for artists and labels.
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {/* Service Card */}
+            <motion.div
+              className="bg-white/10 p-8 rounded-2xl shadow-xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
+              <h3 className="text-xl font-bold mb-2 text-yellow-300">Recording</h3>
+              <p className="text-sm text-blue-200">
+                From singles to albums, our recording service captures your best sound with precision.
               </p>
-            </div>
-            <div className="service-card p-6 bg-gray-800 rounded-lg hover:scale-105 transition-transform duration-300">
-              <h3 className="text-2xl font-semibold mb-4">Recording Studio</h3>
-              <p className="text-gray-300">
-                Fully equipped studio for all your recording needs.
+              <Link
+                to="/pricing"
+                className="mt-4 inline-block px-6 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition"
+              >
+                Book Now
+              </Link>
+            </motion.div>
+
+            {/* Mixing & Mastering */}
+            <motion.div
+              className="bg-white/10 p-8 rounded-2xl shadow-xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
+              <h3 className="text-xl font-bold mb-2 text-yellow-300">Mixing & Mastering</h3>
+              <p className="text-sm text-blue-200">
+                Transform your tracks with our professional mixing and mastering services for that polished sound.
               </p>
-            </div>
-            <div className="service-card p-6 bg-gray-800 rounded-lg hover:scale-105 transition-transform duration-300">
-              <h3 className="text-2xl font-semibold mb-4">Mixing & Mastering</h3>
-              <p className="text-gray-300">
-                Get your tracks mixed and mastered to perfection.
+              <Link
+                to="/pricing"
+                className="mt-4 inline-block px-6 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition"
+              >
+                Book Now
+              </Link>
+            </motion.div>
+
+            {/* Production */}
+            <motion.div
+              className="bg-white/10 p-8 rounded-2xl shadow-xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
+              <h3 className="text-xl font-bold mb-2 text-yellow-300">Production</h3>
+              <p className="text-sm text-blue-200">
+                Let our creative producers bring your music vision to life with the best in gospel and inspirational genres.
               </p>
-            </div>
+              <Link
+                to="/pricing"
+                className="mt-4 inline-block px-6 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition"
+              >
+                Book Now
+              </Link>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Gallery Section */}
-      <Gallery />
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-black text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-extrabold mb-8 text-yellow-400">
+      {/* Testimonials */}
+      <section className="py-24 bg-gradient-to-b from-black via-gray-900 to-blue-900 text-white text-center">
+        <motion.div
+          className="max-w-6xl mx-auto px-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-14 text-yellow-400">
             What Our Clients Say
           </h2>
-          <div className="space-y-8">
-            <div className="testimonial">
-              <p className="text-lg text-gray-300 italic">
-                "Heavenly Rhythms took my music to the next level!"
+          <div className="flex flex-wrap justify-center gap-8">
+            {/* Testimonial 1 */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-md w-full max-w-xs">
+              <p className="text-sm text-blue-200 italic">
+                "Heavenly Rhythms took my music to the next level. Their mixing and mastering team is outstanding!"
               </p>
-              <p className="font-semibold text-white">John Doe, Artist</p>
+              <h3 className="mt-4 text-yellow-400 font-bold">John Doe</h3>
+              <p className="text-blue-200">Artist & Producer</p>
             </div>
-            <div className="testimonial">
-              <p className="text-lg text-gray-300 italic">
-                "A top-notch studio with exceptional sound quality!"
+
+            {/* Testimonial 2 */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-md w-full max-w-xs">
+              <p className="text-sm text-blue-200 italic">
+                "The team at Heavenly Rhythms are professionals. Their recording facilities are top-notch."
               </p>
-              <p className="font-semibold text-white">Jane Smith, Producer</p>
+              <h3 className="mt-4 text-yellow-400 font-bold">Jane Smith</h3>
+              <p className="text-blue-200">Gospel Singer</p>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-md w-full max-w-xs">
+              <p className="text-sm text-blue-200 italic">
+                "My production experience here was amazing. They really know how to bring out the best in my music."
+              </p>
+              <h3 className="mt-4 text-yellow-400 font-bold">Michael Brown</h3>
+              <p className="text-blue-200">Songwriter & Music Producer</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
-
-      {/* Booking Section */}
-      <Booking />
-
-      {/* Music Player Section */}
-      <MusicPlayer />
-
-      {/* Contact Section */}
-      <Contact />
-    </>
+    </div>
   );
-};
+}
 
-export default Homepage;
+export default HomePage;

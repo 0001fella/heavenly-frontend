@@ -28,15 +28,19 @@ const Booking = () => {
       console.log("📌 Booking Data Submitted:", formData);
 
       // Send booking data to the backend
-      const apiUrl = import.meta.env.VITE_API_URL;
-      fetch(`${apiUrl}/bookings`, {
-        method: 'POST',
+      const apiUrl = import.meta.env.VITE_API_URL || backendURL; // Use the backend URL from config if available
+      const response = await fetch(`${apiUrl}/bookings`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
-      })
-      
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit the booking");
+      }
+
       alert("✅ Booking successful!");
 
       // Reset form

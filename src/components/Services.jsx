@@ -1,5 +1,4 @@
 import React from 'react';
-import { backendURL } from "../config";
 import { motion } from 'framer-motion';
 import { FaMicrophoneAlt, FaHeadphonesAlt, FaMusic } from 'react-icons/fa';
 
@@ -45,7 +44,7 @@ function Services() {
             <p className="text-sm text-blue-200 mt-2">
               From tightening up your mix to applying finishing touches for clarity and punch, our experts bring your vision to life.
             </p>
-            <button className="mt-4 px-6 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition">Get Started</button>
+            <button className="mt-4 px-6 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition">Book Now</button>
           </motion.div>
 
           {/* Production Service */}
@@ -61,7 +60,7 @@ function Services() {
             <p className="text-sm text-blue-200 mt-2">
               We specialize in gospel music production that inspires and glorifies God, taking your musical ideas to new heights.
             </p>
-            <button className="mt-4 px-6 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition">Work With Us</button>
+            <button className="mt-4 px-6 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition">Book Now</button>
           </motion.div>
         </div>
       </motion.div>
