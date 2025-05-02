@@ -11,7 +11,6 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Testimonials from "./components/Testimonials";
-import Booking from "./components/Booking";
 import MusicPlayer from "./components/MusicPlayer";
 import Contact from "./components/Contact";
 
@@ -21,7 +20,6 @@ import Events from "./components/Events";
 import EventDetails from "./components/EventDetails";
 import Blog from "./components/Blog";
 import PricingPlans from "./components/PricingPlans";
-
 
 // AOS library
 import AOS from "aos";
@@ -71,7 +69,6 @@ const Homepage = () => (
     <Services />
     <Gallery />
     <Testimonials />
-    <Booking />
     <MusicPlayer />
     <Contact />
   </>
@@ -115,16 +112,6 @@ const TestimonialsPage = () => (
       <meta name="description" content="See what our happy clients have to say." />
     </Helmet>
     <div className="pt-20"><Testimonials /></div>
-  </>
-);
-
-const BookingPage = () => (
-  <>
-    <Helmet>
-      <title>Book a Session - Heavenly Rhythms Studio</title>
-      <meta name="description" content="Schedule your studio session with Heavenly Rhythms." />
-    </Helmet>
-    <div className="pt-20"><Booking /></div>
   </>
 );
 
@@ -175,7 +162,6 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
-          <Route path="/booking" element={<BookingPage />} />
           <Route path="/music" element={<MusicPlayerPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/artists" element={<ArtistProfiles />} />

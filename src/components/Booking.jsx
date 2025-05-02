@@ -1,5 +1,5 @@
-import { backendURL } from "../config";
 import React, { useState } from "react";
+import { backendURL } from "../config";
 import "./Booking.css";
 
 const Booking = () => {
