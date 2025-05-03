@@ -21,7 +21,7 @@ import EventDetails from "./components/EventDetails";
 import Blog from "./components/Blog";
 import PricingPlans from "./components/PricingPlans";
 import Booking from "./components/Booking"; // ✅ NEW
-import YouTube from "./components/YouTube"; // ✅ NEW
+import YouTubePlayer from "./components/YouTubePlayer";
 
 // AOS library
 import AOS from "aos";
