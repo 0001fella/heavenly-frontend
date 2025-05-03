@@ -4,7 +4,7 @@ import axios from "axios";
 const YouTubePlayer = () => {
   const [videos, setVideos] = useState([]);
 
-  const apiKey = "YOUR_API_KEY"; // <<<--- paste your key here
+  const apiKey = "AIzaSyCPxpKS7PeKEvPGE-jWjoiuHQtZ498Lp_0"; // <<<--- paste your key here
   const searchTerms = [
     "Bildad Ogweno gospel songs",
     "Joshua Mbere gospel songs",
