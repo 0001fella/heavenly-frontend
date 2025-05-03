@@ -25,9 +25,32 @@ const events = [
 
 function Events() {
   const [showCalendar, setShowCalendar] = useState(false);
+  const [comments, setComments] = useState({}); // to hold comments for each event
+  const [commentInput, setCommentInput] = useState("");
 
   // Filter upcoming events
   const upcomingEvents = events.filter((event) => new Date(event.date) > new Date());
+
+  const handleCommentChange = (e) => {
+    setCommentInput(e.target.value);
+  };
+
+  const handleCommentSubmit = (eventTitle) => {
+    if (commentInput.trim()) {
+      setComments((prev) => ({
+        ...prev,
+        [eventTitle]: [...(prev[eventTitle] || []), commentInput],
+      }));
+      setCommentInput(""); // reset input after submission
+    }
+  };
+
+  const handleKeyPress = (eventTitle, e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // prevent the default action of new line in textarea
+      handleCommentSubmit(eventTitle);
+    }
+  };
 
   return (
     <section className="py-20 px-6 bg-black text-white min-h-screen">
@@ -82,7 +105,23 @@ function Events() {
                   className="w-full p-2 rounded-md text-black bg-gray-800"
                   rows="3"
                   placeholder="Your comment..."
+                  value={commentInput}
+                  onChange={handleCommentChange}
+                  onKeyDown={(e) => handleKeyPress(event.title, e)}
                 ></textarea>
+                <button
+                  onClick={() => handleCommentSubmit(event.title)}
+                  className="mt-2 bg-yellow-500 text-black font-semibold py-1 px-4 rounded"
+                >
+                  Post Comment
+                </button>
+              </div>
+
+              {/* Displaying Comments */}
+              <div className="mt-4">
+                {comments[event.title] && comments[event.title].map((comment, idx) => (
+                  <p key={idx} className="text-sm text-gray-300 mb-2">- {comment}</p>
+                ))}
               </div>
             </div>
           ))}
