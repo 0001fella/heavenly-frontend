@@ -20,6 +20,8 @@ import Events from "./components/Events";
 import EventDetails from "./components/EventDetails";
 import Blog from "./components/Blog";
 import PricingPlans from "./components/PricingPlans";
+import Booking from "./components/Booking"; // ✅ NEW
+import YouTube from "./components/YouTube"; // ✅ NEW
 
 // AOS library
 import AOS from "aos";
@@ -169,7 +171,9 @@ function App() {
           <Route path="/events/:eventName" element={<EventDetails />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/pricing" element={<PricingPlans />} />
-          
+          <Route path="/booking" element={<Booking />} />        {/* ✅ NEW */}
+          <Route path="/youtube" element={<YouTube />} />        {/* ✅ NEW */}
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
