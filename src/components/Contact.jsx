@@ -24,6 +24,8 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSuccessMessage(''); // Reset success message on new submission
+    setErrorMessage(''); // Reset error message on new submission
 
     try {
       const response = await fetch(`${backendURL}/api/contact`, {
@@ -38,7 +40,9 @@ function Contact() {
         setSuccessMessage('Your message has been sent successfully!');
         setFormData({ name: '', email: '', message: '' }); // Reset form fields
       } else {
-        throw new Error('Failed to send message');
+        // You can check for a specific error response here if necessary
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || 'Failed to send message');
       }
     } catch (error) {
       setErrorMessage('An error occurred. Please try again later.');

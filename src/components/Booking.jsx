@@ -15,13 +15,48 @@ const Booking = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  // Regex for email and phone validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    if (!formData.name || !formData.email || !formData.phoneNumber || !formData.service || !formData.date || !formData.timeFrom || !formData.timeTo || !formData.numberOfPeople) {
+      return "All fields are required.";
+    }
+
+    if (!emailRegex.test(formData.email)) {
+      return "Please enter a valid email address.";
+    }
+
+    if (!phoneRegex.test(formData.phoneNumber)) {
+      return "Please enter a valid phone number (10 digits).";
+    }
+
+    if (formData.numberOfPeople <= 0) {
+      return "Number of people must be greater than zero.";
+    }
+
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -41,7 +76,7 @@ const Booking = () => {
         throw new Error("Failed to submit the booking");
       }
 
-      alert("✅ Booking successful!");
+      setSuccess("✅ Booking successful!");
 
       // Reset form
       setFormData({
@@ -54,10 +89,9 @@ const Booking = () => {
         timeTo: "",
         numberOfPeople: "",
       });
-
     } catch (error) {
       console.error("❌ Booking error:", error);
-      alert("⚠️ Booking failed. Please try again.");
+      setError("⚠️ Booking failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -177,12 +211,22 @@ const Booking = () => {
             />
           </div>
 
+          {/* Error Message */}
+          {error && <div className="text-red-500 text-sm">{error}</div>}
+
+          {/* Success Message */}
+          {success && <div className="text-green-500 text-sm">{success}</div>}
+
           <button
             type="submit"
             className="w-full py-4 bg-gradient-to-r from-blue-600 to-black hover:from-blue-700 hover:to-black transition duration-300 rounded-md font-semibold text-white"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Processing..." : "Book Now"}
+            {isSubmitting ? (
+              <div className="loader">Processing...</div>
+            ) : (
+              "Book Now"
+            )}
           </button>
         </form>
 

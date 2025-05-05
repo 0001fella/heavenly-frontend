@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import axios from "axios";  // For sending form data to the backend
+import axios from "axios";
 
+// Initialize AOS animation
 AOS.init({ duration: 1000, once: true });
 
 function Testimonials() {
@@ -11,27 +12,51 @@ function Testimonials() {
     feedback: "",
     rating: 0,
   });
-
   const [submitting, setSubmitting] = useState(false);
-
-  const [testimonials, setTestimonials] = useState([]);  // To hold fetched testimonials
+  const [testimonials, setTestimonials] = useState([]);
 
   // Fetch testimonials from the backend when component mounts
   const fetchTestimonials = async () => {
     try {
       const res = await axios.get("/api/testimonials");
-      setTestimonials(res.data);  // Update state with fetched testimonials
+      setTestimonials(res.data);
     } catch (error) {
       console.error("Error fetching testimonials", error);
     }
   };
 
   // Fetch testimonials when the page loads
-  React.useEffect(() => {
+  useEffect(() => {
     fetchTestimonials();
   }, []);
 
-  // Function to render stars based on the rating
+  // Handle form input changes
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      // Send testimonial data to backend
+      await axios.post("/api/testimonials", formData);
+      alert("Thanks for your feedback!");
+      setFormData({ name: "", feedback: "", rating: 0 }); // Reset form
+      fetchTestimonials(); // Refresh the testimonials list
+    } catch (err) {
+      console.error("Failed to submit testimonial", err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Render stars for the rating
   const renderStars = (rating, setRatingFunc = null) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -48,31 +73,6 @@ function Testimonials() {
     return stars;
   };
 
-  // Handle input changes
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    try {
-      // Send testimonial data to backend
-      await axios.post("/api/testimonials", formData);
-      alert("Thanks for your feedback!");
-      setFormData({ name: "", feedback: "", rating: 0 });
-      fetchTestimonials();  // Fetch updated testimonials
-    } catch (err) {
-      console.error("Failed to submit testimonial", err);
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   return (
     <section id="testimonials" className="bg-gradient-to-r from-blue-900 to-black text-white py-20 px-6">
       <div className="max-w-4xl mx-auto">
@@ -80,7 +80,7 @@ function Testimonials() {
           Share Your Experience
         </h2>
 
-        {/* Submission Form */}
+        {/* Testimonial Submission Form */}
         <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg mb-16" data-aos="fade-up">
           <input
             type="text"
@@ -112,7 +112,7 @@ function Testimonials() {
           </button>
         </form>
 
-        {/* Static Testimonials */}
+        {/* Display Testimonials */}
         <h3 className="text-3xl font-semibold text-yellow-400 mb-8 text-center" data-aos="fade-up">
           What Artists Say
         </h3>
