@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { backendURL } from "../config";
 import "./Booking.css";
 
 const Booking = () => {
@@ -18,7 +17,6 @@ const Booking = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  // Regex for email and phone validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[0-9]{10}$/;
 
@@ -27,22 +25,14 @@ const Booking = () => {
   };
 
   const validateForm = () => {
-    if (!formData.name || !formData.email || !formData.phoneNumber || !formData.service || !formData.date || !formData.timeFrom || !formData.timeTo || !formData.numberOfPeople) {
+    const { name, email, phoneNumber, service, date, timeFrom, timeTo, numberOfPeople } = formData;
+    if (!name || !email || !phoneNumber || !service || !date || !timeFrom || !timeTo || !numberOfPeople) {
       return "All fields are required.";
     }
-
-    if (!emailRegex.test(formData.email)) {
-      return "Please enter a valid email address.";
-    }
-
-    if (!phoneRegex.test(formData.phoneNumber)) {
-      return "Please enter a valid phone number (10 digits).";
-    }
-
-    if (formData.numberOfPeople <= 0) {
-      return "Number of people must be greater than zero.";
-    }
-
+    if (!emailRegex.test(email)) return "Enter a valid email address.";
+    if (!phoneRegex.test(phoneNumber)) return "Phone number must be 10 digits.";
+    if (Number(numberOfPeople) <= 0) return "Number of people must be more than zero.";
+    if (timeTo <= timeFrom) return "End time must be after start time.";
     return null;
   };
 
@@ -60,25 +50,19 @@ const Booking = () => {
     setIsSubmitting(true);
 
     try {
-      console.log("📌 Booking Data Submitted:", formData);
-
-      // Send booking data to the backend
-      const apiUrl = import.meta.env.VITE_API_URL || backendURL; // Use the backend URL from config if available
+      const apiUrl = import.meta.env.VITE_API_URL;
       const response = await fetch(`${apiUrl}/bookings`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit the booking");
+        const data = await response.json();
+        throw new Error(data.message || "Server error");
       }
 
       setSuccess("✅ Booking successful!");
-
-      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -89,8 +73,8 @@ const Booking = () => {
         timeTo: "",
         numberOfPeople: "",
       });
-    } catch (error) {
-      console.error("❌ Booking error:", error);
+    } catch (err) {
+      console.error("Booking failed:", err);
       setError("⚠️ Booking failed. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -99,7 +83,6 @@ const Booking = () => {
 
   return (
     <section className="booking-section py-16 px-4 sm:px-8 lg:px-32 bg-gradient-to-r from-blue-800 to-black text-white">
-      {/* Logo */}
       <div className="flex justify-center mb-8">
         <img src="/Logo.png" alt="Studio Logo" className="w-40" />
       </div>
@@ -109,51 +92,36 @@ const Booking = () => {
       </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* Booking Form */}
         <form onSubmit={handleSubmit} className="bg-white/20 backdrop-blur-lg p-6 rounded-2xl shadow-lg space-y-6">
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
+          {[
+            { label: "Full Name", name: "name", type: "text" },
+            { label: "Email Address", name: "email", type: "email" },
+            { label: "Phone Number", name: "phoneNumber", type: "tel" },
+            { label: "Booking Date", name: "date", type: "date" },
+            { label: "Booking Time (From)", name: "timeFrom", type: "time" },
+            { label: "Booking Time (To)", name: "timeTo", type: "time" },
+            { label: "Number of People", name: "numberOfPeople", type: "number" },
+          ].map(({ label, name, type }) => (
+            <div key={name}>
+              <label className="block text-sm font-semibold mb-1">{label}</label>
+              <input
+                type={type}
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
+              />
+            </div>
+          ))}
 
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Phone Number</label>
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
-
-          <div className="form-group">
+          <div>
             <label className="block text-sm font-semibold mb-1">Choose Service</label>
             <select
               name="service"
               value={formData.service}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
+              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             >
               <option value="">Select a service</option>
@@ -163,85 +131,27 @@ const Booking = () => {
             </select>
           </div>
 
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Booking Date</label>
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Booking Time (From)</label>
-            <input
-              type="time"
-              name="timeFrom"
-              value={formData.timeFrom}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Booking Time (To)</label>
-            <input
-              type="time"
-              name="timeTo"
-              value={formData.timeTo}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="block text-sm font-semibold mb-1">Number of People</label>
-            <input
-              type="number"
-              name="numberOfPeople"
-              value={formData.numberOfPeople}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-md bg-white text-black focus:outline-none"
-              required
-            />
-          </div>
-
-          {/* Error Message */}
-          {error && <div className="text-red-500 text-sm">{error}</div>}
-
-          {/* Success Message */}
-          {success && <div className="text-green-500 text-sm">{success}</div>}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {success && <p className="text-green-500 text-sm">{success}</p>}
 
           <button
             type="submit"
             className="w-full py-4 bg-gradient-to-r from-blue-600 to-black hover:from-blue-700 hover:to-black transition duration-300 rounded-md font-semibold text-white"
             disabled={isSubmitting}
           >
-            {isSubmitting ? (
-              <div className="loader">Processing...</div>
-            ) : (
-              "Book Now"
-            )}
+            {isSubmitting ? "Processing..." : "Book Now"}
           </button>
         </form>
 
-        {/* Why Book With Us */}
         <div
           className="relative p-6 rounded-2xl shadow-xl text-white flex flex-col justify-between min-h-[400px]"
           style={{
             backgroundImage: 'url("/artist1.jpg")',
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
           }}
         >
-          <div className="absolute inset-0 bg-black/60 rounded-2xl z-0"></div>
-
+          <div className="absolute inset-0 bg-black/60 rounded-2xl z-0" />
           <div className="relative z-10">
             <h3 className="text-2xl font-bold mb-4">Why Book With Us?</h3>
             <ul className="list-disc pl-5 space-y-3 text-white/90">
