@@ -4,14 +4,14 @@ import { FaSun, FaMoon } from "react-icons/fa";
 
 const services = {
   Recording: [
-    { name: "Single Track", desc: "Perfect for individual tracks.", price: 6500 },
-    { name: "EP Recording", desc: "For a collection of 3-5 tracks.", price: 32500 },
+    { name: "Single Track", desc: "Perfect for individual tracks.", price: 10000 },
+    { name: "EP Recording", desc: "For a collection of 3-5 tracks.", price: 25000 },
     { name: "Album Recording", desc: "Full album of 10+ tracks.", price: 65000 },
   ],
   Mixing: [
-    { name: "Single Track Mixing", desc: "Great for crisp, clean sound.", price: 9750 },
-    { name: "EP Mixing", desc: "3-5 tracks mixed professionally.", price: 45500 },
-    { name: "Album Mixing", desc: "Full album mixdown package.", price: 91000 },
+    { name: "Single Track Mixing", desc: "Great for crisp, clean sound.", price: 10000 },
+    { name: "EP Mixing", desc: "3-5 tracks mixed professionally.", price: 25000 },
+    { name: "Album Mixing", desc: "Full album mixdown package.", price: 65000 },
   ],
   Mastering: [
     { name: "Single Track Mastering", desc: "Polished, radio-ready sound.", price: 6500 },
@@ -19,8 +19,8 @@ const services = {
     { name: "Album Mastering", desc: "For 10 or more tracks.", price: 65000 },
   ],
   "Other Services": [
-    { name: "Live Performance Recording", desc: "Capture the energy of your show.", price: 39000 },
-    { name: "Songwriting Assistance", desc: "Need help with lyrics or melody?", price: 19500 },
+    { name: "Live Performance Recording", desc: "Capture the energy of your show.", price: 40000 },
+    { name: "Songwriting Assistance", desc: "Need help with lyrics or melody?", price: 20000 },
   ],
 };
 
