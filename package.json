@@ -12,6 +12,7 @@
     "@vitejs/plugin-react": "^4.4.1",
     "aos": "^2.3.4",
     "axios": "^1.9.0",
+    "cors": "^2.8.5",
     "framer-motion": "^12.7.4",
     "lucide-react": "^0.501.0",
     "qrcode.react": "^4.2.0",
