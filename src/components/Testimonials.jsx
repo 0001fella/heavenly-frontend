@@ -7,6 +7,7 @@ AOS.init({ duration: 1000, once: true });
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
+
 function Testimonials() {
   const [formData, setFormData] = useState({ name: "", feedback: "", rating: null });
   const [submitting, setSubmitting] = useState(false);
@@ -35,6 +36,7 @@ function Testimonials() {
 
     try {
       await axios.post(`${API_BASE}/api/testimonials`, formData);
+
       alert("Thanks for your feedback!");
       setFormData({ name: "", feedback: "", rating: null });
       fetchTestimonials();
