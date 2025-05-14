@@ -3,19 +3,15 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
 
-// Initialize AOS animation
 AOS.init({ duration: 1000, once: true });
 
 function Testimonials() {
-  const [formData, setFormData] = useState({
-    name: "",
-    feedback: "",
-    rating: 0,
-  });
+  const [formData, setFormData] = useState({ name: "", feedback: "", rating: null });
   const [submitting, setSubmitting] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
 
-  // Fetch testimonials from the backend when component mounts
+  useEffect(() => { fetchTestimonials(); }, []);
+
   const fetchTestimonials = async () => {
     try {
       const res = await axios.get("/api/testimonials");
@@ -25,30 +21,19 @@ function Testimonials() {
     }
   };
 
-  // Fetch testimonials when the page loads
-  useEffect(() => {
-    fetchTestimonials();
-  }, []);
-
-  // Handle form input changes
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      // Send testimonial data to backend
       await axios.post("/api/testimonials", formData);
       alert("Thanks for your feedback!");
-      setFormData({ name: "", feedback: "", rating: 0 }); // Reset form
-      fetchTestimonials(); // Refresh the testimonials list
+      setFormData({ name: "", feedback: "", rating: null });
+      fetchTestimonials();
     } catch (err) {
       console.error("Failed to submit testimonial", err);
     } finally {
@@ -56,21 +41,16 @@ function Testimonials() {
     }
   };
 
-  // Render stars for the rating
   const renderStars = (rating, setRatingFunc = null) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <span
-          key={i}
-          onClick={() => setRatingFunc && setRatingFunc(i)}
-          className={`cursor-pointer text-2xl ${i <= rating ? "text-yellow-400" : "text-gray-500"}`}
-        >
-          ★
-        </span>
-      );
-    }
-    return stars;
+    return Array.from({ length: 5 }, (_, i) => (
+      <span
+        key={i}
+        onClick={() => setRatingFunc && setRatingFunc(i + 1)}
+        className={`cursor-pointer text-2xl ${i + 1 <= rating ? "text-yellow-400" : "text-gray-500"}`}
+      >
+        ★
+      </span>
+    ));
   };
 
   return (
@@ -80,7 +60,6 @@ function Testimonials() {
           Share Your Experience
         </h2>
 
-        {/* Testimonial Submission Form */}
         <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg mb-16" data-aos="fade-up">
           <input
             type="text"
@@ -112,20 +91,15 @@ function Testimonials() {
           </button>
         </form>
 
-        {/* Display Testimonials */}
         <h3 className="text-3xl font-semibold text-yellow-400 mb-8 text-center" data-aos="fade-up">
           What Artists Say
         </h3>
         <div className="grid md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
-              data-aos="fade-up"
-            >
-              <p className="italic text-lg mb-4">"{testimonial.feedback}"</p>
-              <div className="flex justify-center mb-4">{renderStars(testimonial.rating)}</div>
-              <h4 className="font-semibold text-yellow-400">— {testimonial.name}</h4>
+          {testimonials.map((t, index) => (
+            <div key={index} className="bg-gray-800 p-6 rounded-xl shadow-lg" data-aos="fade-up">
+              <p className="italic text-lg mb-4">"{t.feedback}"</p>
+              <div className="flex justify-center mb-4">{renderStars(t.rating)}</div>
+              <h4 className="font-semibold text-yellow-400">— {t.name}</h4>
             </div>
           ))}
         </div>
