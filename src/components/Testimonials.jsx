@@ -5,16 +5,20 @@ import axios from "axios";
 
 AOS.init({ duration: 1000, once: true });
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 function Testimonials() {
   const [formData, setFormData] = useState({ name: "", feedback: "", rating: null });
   const [submitting, setSubmitting] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
 
-  useEffect(() => { fetchTestimonials(); }, []);
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
 
   const fetchTestimonials = async () => {
     try {
-      const res = await axios.get("/api/testimonials");
+      const res = await axios.get(`${API_BASE}/api/testimonials`);
       setTestimonials(res.data);
     } catch (error) {
       console.error("Error fetching testimonials", error);
@@ -30,7 +34,7 @@ function Testimonials() {
     setSubmitting(true);
 
     try {
-      await axios.post("/api/testimonials", formData);
+      await axios.post(`${API_BASE}/api/testimonials`, formData);
       alert("Thanks for your feedback!");
       setFormData({ name: "", feedback: "", rating: null });
       fetchTestimonials();
