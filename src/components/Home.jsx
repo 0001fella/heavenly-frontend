@@ -1,95 +1,100 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Hero from "./Hero";
-import { FaHeadphones, FaMusic, FaStar, FaMapMarkerAlt, FaMicrophoneAlt } from "react-icons/fa";
 
 const HomePage = () => {
   return (
-    <div className="bg-white text-gray-900 overflow-x-hidden">
+    <div className="bg-gradient-to-b from-black via-gray-900 to-blue-900 text-white overflow-x-hidden">
       {/* Hero Section */}
       <Hero />
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-blue-50">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-12 text-blue-700">Why Artists Choose Heavenly Rhythms</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+      {/* Featured Services */}
+      <section className="py-24 px-6 bg-gray-900">
+        <motion.div
+          className="max-w-6xl mx-auto text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold mb-14 text-yellow-400">
+            Our Featured Services
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[
-              { icon: FaMicrophoneAlt, text: "Crystal-clear vocal recording" },
-              { icon: FaHeadphones, text: "High-end mixing & mastering gear" },
-              { icon: FaMusic, text: "Genre-flexible production team" },
-              { icon: FaStar, text: "Trusted by rising and pro-level artists" },
-              { icon: FaMapMarkerAlt, text: "Easy-to-reach Nairobi location" },
-            ].map((item, index) => (
+              {
+                title: "Recording",
+                desc: "Capture your best sound — from singles to albums with professional precision.",
+              },
+              {
+                title: "Mixing & Mastering",
+                desc: "Get your tracks polished and radio-ready with our high-end tools.",
+              },
+              {
+                title: "Production",
+                desc: "Let our producers bring your musical vision to life — gospel, afrobeat, you name it.",
+              },
+            ].map((service, i) => (
               <motion.div
-                key={index}
-                className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition"
+                key={i}
+                className="bg-white/10 p-8 rounded-2xl shadow-xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300"
                 whileHover={{ scale: 1.05 }}
               >
-                <item.icon className="text-blue-600 text-3xl mb-4 mx-auto" />
-                <p className="text-blue-900 font-semibold">{item.text}</p>
+                <h3 className="text-xl font-bold mb-2 text-yellow-300">{service.title}</h3>
+                <p className="text-sm text-blue-200">{service.desc}</p>
+                <Link
+                  to="/pricing"
+                  className="mt-4 inline-block px-6 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition"
+                >
+                  Book Now
+                </Link>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Image Gallery */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12 text-blue-700">Studio Vibes Gallery</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {["/studio1.jpg", "/studio2.jpg", "/session1.jpg", "/gear.jpg", "/mixing.jpg"].map((img, index) => (
-              <motion.div
-                key={index}
-                className="overflow-hidden rounded-xl shadow-lg"
-                whileHover={{ scale: 1.05 }}
-              >
-                <img src={img} alt="Studio scene" className="w-full h-48 object-cover" />
-              </motion.div>
+      {/* Testimonials */}
+      <section className="py-24 text-center bg-gradient-to-b from-black via-gray-900 to-blue-900">
+        <motion.div
+          className="max-w-6xl mx-auto px-6"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold mb-14 text-yellow-400">
+            What Our Clients Say
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+            {[
+              {
+                quote: "Heavenly Rhythms took my music to the next level. Their mixing is fire!",
+                name: "John Doe",
+                role: "Artist & Producer",
+              },
+              {
+                quote: "Top-notch recording space. Super clean audio and cool vibes.",
+                name: "Jane Smith",
+                role: "Gospel Singer",
+              },
+              {
+                quote: "They really get gospel music. My album turned out better than I imagined.",
+                name: "Michael Brown",
+                role: "Music Producer",
+              },
+            ].map((testimonial, i) => (
+              <div key={i} className="bg-gray-800 p-6 rounded-xl shadow-md">
+                <p className="text-sm text-blue-200 italic mb-4">"{testimonial.quote}"</p>
+                <h3 className="text-yellow-400 font-bold">{testimonial.name}</h3>
+                <p className="text-blue-200 text-sm">{testimonial.role}</p>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Announcements */}
-      <section className="py-20 bg-blue-100 text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-6 text-blue-800">🎙️ Announcements</h2>
-          <p className="text-lg text-blue-700 mb-4">
-            🚨 New package alert: Get 3 studio sessions + 1 free mix for just KES 5,000 this month only!
-          </p>
-          <p className="text-blue-700">
-            📅 Live gospel cypher happening every Saturday — come through & record your freestyle.
-          </p>
-        </div>
-      </section>
-
-      {/* Location / Contact Highlight */}
-      <section className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <img src="/studio2.jpg" alt="Location preview" className="rounded-xl shadow-lg" />
-          </motion.div>
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-3xl font-bold text-blue-700 mb-4">Visit Us In Nairobi</h3>
-            <p className="text-lg text-gray-700 mb-4">
-              Located in the heart of the city, Heavenly Rhythms is easily accessible via matatu, boda, or car. Pull up and bring the heat.
-            </p>
-            <p className="text-blue-600 font-medium">📍 Tom Mboya Street, Nairobi CBD</p>
-            <p className="text-blue-600 font-medium">📞 Call: +254 712 345678</p>
-          </motion.div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
