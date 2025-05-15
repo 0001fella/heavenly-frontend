@@ -6,7 +6,6 @@ import Hero from "./Hero";
 const HomePage = () => {
   return (
     <div className="bg-gradient-to-b from-black via-gray-900 to-blue-900 text-white overflow-x-hidden">
-      {/* Hero Section */}
       <Hero />
 
       {/* Featured Services */}
@@ -18,10 +17,7 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-400">
-            Our Featured Services
-          </h2>
-
+          <h2 className="text-4xl font-bold mb-14 text-yellow-400">Our Featured Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[
               {
@@ -56,6 +52,31 @@ const HomePage = () => {
         </motion.div>
       </section>
 
+      {/* Gallery/Studio Showcase */}
+      <section className="py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <motion.div
+          className="max-w-6xl mx-auto text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold mb-14 text-yellow-400">Studio Highlights</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {["studio1.jpg", "studio2.jpg", "studio3.jpg", "setup.jpg", "studio4.jpg"].map(
+              (img, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition duration-300"
+                >
+                  <img src={`/${img}`} alt={`Studio ${index + 1}`} className="w-full h-64 object-cover" />
+                </div>
+              )
+            )}
+          </div>
+        </motion.div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-24 text-center bg-gradient-to-b from-black via-gray-900 to-blue-900">
         <motion.div
@@ -65,10 +86,7 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-400">
-            What Our Clients Say
-          </h2>
-
+          <h2 className="text-4xl font-bold mb-14 text-yellow-400">What Our Clients Say</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {[
               {
