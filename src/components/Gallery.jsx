@@ -1,111 +1,82 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Gallery() {
-  const [theme, setTheme] = useState("dark");
+const images = [
+  { src: "/studio1.jpg", title: "Studio Vibe" },
+  { src: "/studio2.jpg", title: "Creative Space" },
+  { src: "/session1.jpg", title: "Recording Session" },
+  { src: "/artist1.jpg", title: "Bildad Ogweno" },
+  { src: "/artist2.png", title: "Joshua Mbere" },
+  { src: "/artist3.png", title: "Elijah Jalogo" },
+  { src: "/gear.jpg", title: "Top Gear" },
+  { src: "/mixing.jpg", title: "Mixing in Progress" },
+  { src: "/mixing1.jpg", title: "Another Mix" },
+];
+
+const Gallery = () => {
+  const [isPaused, setIsPaused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [filterTag, setFilterTag] = useState("All");
 
-  const images = [
-    { src: "/studio1.jpg", title: "Studio Vibe", tags: ["Studio", "Vibe"] },
-    { src: "/studio2.jpg", title: "Creative Space", tags: ["Studio", "Creative"] },
-    { src: "/session1.jpg", title: "Recording Session", tags: ["Session", "Recording"] },
-    { src: "/artist1.jpg", title: "Bildad Ogweno", tags: ["Artist"] },
-    { src: "/artist2.png", title: "Joshua Mbere", tags: ["Artist"] },
-    { src: "/artist3.png", title: "Elijah Jalogo", tags: ["Artist"] },
-    { src: "/gear.jpg", title: "Top Gear", tags: ["Gear", "Equipment"] },
-    { src: "/mixing.jpg", title: "Mixing in Progress", tags: ["Mixing", "Studio"] },
-    { src: "/mixing1.jpg", title: "Mixing in Progress", tags: ["Mixing", "Studio"] },
-  ];
-
+  const openModal = (index) => setSelectedIndex(index);
   const closeModal = () => setSelectedIndex(null);
-  const showPrev = () => setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  const showNext = () => setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-  const uniqueTags = ["All", ...new Set(images.flatMap((img) => img.tags))];
-
-  const filteredImages = filterTag === "All"
-    ? images
-    : images.filter((img) => img.tags.includes(filterTag));
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+  const showNext = () =>
+    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  const showPrev = () =>
+    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <section
-      id="gallery"
-      className={`${
-        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
-      } py-20 px-4 relative transition-colors duration-500`}
-    >
-      <div className="max-w-6xl mx-auto">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <img
-            src="/Logo.png"  // Reference image from public folder
-            alt="Studio Logo"
-            className="h-20 w-auto drop-shadow-lg"
-            style={{ filter: theme === "dark" ? "invert(1)" : "none" }}
-          />
-        </div>
+    <section id="gallery" className="bg-black text-white py-16 overflow-hidden relative">
+      <h2 className="text-4xl font-bold text-center mb-10 text-yellow-400">
+        Gallery & Portfolio
+      </h2>
 
-        <h2 className="text-3xl font-bold text-center mb-12">Gallery & Portfolio</h2>
-
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="absolute top-6 right-6 bg-gray-800 text-white px-4 py-2 rounded-full transition duration-300"
+      {/* Auto-scrolling container */}
+      <div
+        className="w-full overflow-hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <motion.div
+          className="flex gap-6 w-max"
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30,
+              ease: "linear",
+            },
+          }}
+          style={{
+            animationPlayState: isPaused ? "paused" : "running",
+            whiteSpace: "nowrap",
+          }}
         >
-          {theme === "dark" ? "Light Mode" : "Dark Mode"}
-        </button>
-
-        {/* Tag Filters */}
-        <div className="text-center mb-8">
-          {uniqueTags.map((tag, index) => (
-            <button
-              key={index}
-              className={`px-4 py-2 mx-2 ${
-                filterTag === tag ? "bg-green-500 scale-110" : "bg-gray-800"
-              } text-white rounded-lg transition duration-300`}
-              onClick={() => setFilterTag(tag)}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-
-        {/* Gallery Grid */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredImages.map((img, index) => (
+          {[...images, ...images].map((img, index) => (
             <div
               key={index}
-              className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer group"
-              onClick={() => setSelectedIndex(index)}
+              className="min-w-[300px] h-[200px] relative cursor-pointer"
+              onClick={() => openModal(index % images.length)}
             >
               <img
                 src={img.src}
                 alt={img.title}
-                className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
+                className="w-full h-full object-cover rounded-lg shadow-lg"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                <span className="text-lg font-semibold">{img.title}</span>
-              </div>
-              <div className="absolute top-2 left-2 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm">
-                {img.tags.join(", ")}
+              <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 px-3 py-1 rounded text-sm text-white">
+                {img.title}
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Modal View */}
+      {/* Modal */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
-            className={`fixed inset-0 ${
-              theme === "dark" ? "bg-black bg-opacity-90" : "bg-white bg-opacity-90"
-            } flex items-center justify-center z-50`}
+            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -113,35 +84,37 @@ function Gallery() {
           >
             <motion.img
               src={images[selectedIndex].src}
-              alt="Enlarged"
-              className="max-w-full max-h-[90vh] rounded-lg shadow-2xl z-50"
+              alt="Full view"
+              className="max-w-full max-h-[90vh] rounded-lg shadow-2xl"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
             />
+            {/* Close Button */}
             <button
-              className="absolute top-6 right-6 text-white text-3xl font-bold bg-black bg-opacity-60 px-4 py-2 rounded-full z-50"
               onClick={closeModal}
+              className="absolute top-6 right-6 text-white text-3xl bg-black bg-opacity-50 px-4 py-2 rounded-full"
             >
               ✕
             </button>
-
+            {/* Left Arrow */}
             <button
-              className="absolute left-6 text-white text-4xl bg-black bg-opacity-50 px-3 py-2 rounded-full z-50"
               onClick={(e) => {
                 e.stopPropagation();
                 showPrev();
               }}
+              className="absolute left-6 text-white text-4xl bg-black bg-opacity-50 px-3 py-2 rounded-full"
             >
               &lt;
             </button>
+            {/* Right Arrow */}
             <button
-              className="absolute right-6 text-white text-4xl bg-black bg-opacity-50 px-3 py-2 rounded-full z-50"
               onClick={(e) => {
                 e.stopPropagation();
                 showNext();
               }}
+              className="absolute right-6 text-white text-4xl bg-black bg-opacity-50 px-3 py-2 rounded-full"
             >
               &gt;
             </button>
@@ -150,6 +123,6 @@ function Gallery() {
       </AnimatePresence>
     </section>
   );
-}
+};
 
 export default Gallery;
