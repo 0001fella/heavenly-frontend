@@ -98,7 +98,8 @@ function Testimonials() {
         </form>
 
         <h3 className="text-3xl font-semibold text-yellow-400 mb-8 text-center" data-aos="fade-up">
-          What Artists Say
+          Comments:
+          
         </h3>
         <div className="grid md:grid-cols-2 gap-8">
           {testimonials.map((t, index) => (
