@@ -1,15 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Hero from "./Hero";
 
 const HomePage = () => {
   return (
-    <div className="bg-gradient-to-b from-black via-gray-900 to-blue-900 text-white overflow-x-hidden">
+    <div className="bg-gradient-to-b from-slate-900 via-blue-800 to-blue-600 text-white overflow-x-hidden">
+      {/* Hero Section */}
       <Hero />
 
-      {/* Featured Services */}
-      <section className="py-24 px-6 bg-gray-900">
+      {/* Intro Section */}
+      <section className="py-24 px-6 bg-white text-gray-900">
         <motion.div
           className="max-w-6xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -17,43 +17,91 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-400">Our Featured Services</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <h2 className="text-4xl font-extrabold mb-6 text-blue-800">Your Sound, Elevated</h2>
+          <p className="text-lg max-w-3xl mx-auto leading-relaxed">
+            At Heavenly Rhythms, we blend cutting-edge technology with spiritual creativity to bring your sound to life. Whether you're recording your first gospel hit or mixing your 10th album, our studio is your sanctuary of sound.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Services */}
+      <section className="py-24 px-6 bg-blue-700">
+        <motion.div
+          className="max-w-6xl mx-auto text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl font-bold mb-14 text-yellow-300">Our Core Services</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {[
               {
-                title: "Recording",
-                desc: "Capture your best sound — from singles to albums with professional precision.",
+                title: "Recording Studio",
+                desc: "Industry-standard vocal booths and hardware. Get clean, crisp sound with zero noise.",
               },
               {
                 title: "Mixing & Mastering",
-                desc: "Get your tracks polished and radio-ready with our high-end tools.",
+                desc: "From frequencies to fades, we shape your sound to professional perfection.",
               },
               {
-                title: "Production",
-                desc: "Let our producers bring your musical vision to life — gospel, afrobeat, you name it.",
+                title: "Beats & Production",
+                desc: "Need an exclusive gospel, afrobeats, or trap beat? We got you.",
+              },
+              {
+                title: "Voice Overs",
+                desc: "Radio, TV, YouTube intros, ads. Record quality voice overs with pristine clarity.",
+              },
+              {
+                title: "Artist Coaching",
+                desc: "One-on-one coaching to grow your vocal skills, stage presence, and confidence.",
+              },
+              {
+                title: "Live Session Recording",
+                desc: "Full band recording with mic separation and studio monitoring.",
               },
             ].map((service, i) => (
               <motion.div
                 key={i}
-                className="bg-white/10 p-8 rounded-2xl shadow-xl hover:shadow-blue-500/30 hover:scale-105 transition duration-300"
+                className="bg-white text-gray-900 p-6 rounded-2xl shadow-xl"
                 whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
               >
-                <h3 className="text-xl font-bold mb-2 text-yellow-300">{service.title}</h3>
-                <p className="text-sm text-blue-200">{service.desc}</p>
-                <Link
-                  to="/pricing"
-                  className="mt-4 inline-block px-6 py-2 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition"
-                >
-                  Book Now
-                </Link>
+                <h3 className="text-xl font-bold mb-2 text-blue-800">{service.title}</h3>
+                <p className="text-sm">{service.desc}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </section>
 
-      {/* Gallery/Studio Showcase */}
-      <section className="py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
+      {/* Studio Vibe Section */}
+      <section className="py-24 px-6 bg-white text-gray-900">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <img src="/gear.jpg" alt="Studio Gear" className="rounded-xl shadow-xl" />
+          </motion.div>
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold mb-4 text-blue-800">Our Studio Vibe</h2>
+            <p className="text-lg leading-relaxed">
+              It's not just about sound — it’s about **energy**. Our studio is designed to inspire. With ambient lighting, a calm atmosphere, and top-tier equipment, you’ll create like never before.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 px-6 bg-blue-800 text-white">
         <motion.div
           className="max-w-6xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -61,54 +109,29 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-400">Studio Highlights</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {["studio1.jpg", "studio2.jpg", "studio3.jpg", "setup.jpg", "studio4.jpg"].map(
-              (img, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition duration-300"
-                >
-                  <img src={`/${img}`} alt={`Studio ${index + 1}`} className="w-full h-64 object-cover" />
-                </div>
-              )
-            )}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 text-center bg-gradient-to-b from-black via-gray-900 to-blue-900">
-        <motion.div
-          className="max-w-6xl mx-auto px-6"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-400">What Our Clients Say</h2>
+          <h2 className="text-4xl font-bold mb-14 text-yellow-300">What Artists Are Saying</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {[
               {
-                quote: "Heavenly Rhythms took my music to the next level. Their mixing is fire!",
-                name: "John Doe",
-                role: "Artist & Producer",
+                quote: "Best mixing I’ve ever had. The track sounded better than I imagined.",
+                name: "Faith Mwangi",
+                role: "Gospel Artist",
               },
               {
-                quote: "Top-notch recording space. Super clean audio and cool vibes.",
-                name: "Jane Smith",
-                role: "Gospel Singer",
+                quote: "The vibe here is unmatched. You walk in nervous, walk out with a hit.",
+                name: "Kev Masterpiece",
+                role: "Afrobeat Producer",
               },
               {
-                quote: "They really get gospel music. My album turned out better than I imagined.",
-                name: "Michael Brown",
-                role: "Music Producer",
+                quote: "They guided me from writing to mastering. A complete experience.",
+                name: "Sarah Wanjiru",
+                role: "New Artist",
               },
             ].map((testimonial, i) => (
-              <div key={i} className="bg-gray-800 p-6 rounded-xl shadow-md">
-                <p className="text-sm text-blue-200 italic mb-4">"{testimonial.quote}"</p>
-                <h3 className="text-yellow-400 font-bold">{testimonial.name}</h3>
-                <p className="text-blue-200 text-sm">{testimonial.role}</p>
+              <div key={i} className="bg-blue-900 p-6 rounded-xl shadow-md">
+                <p className="italic mb-4 text-sm">"{testimonial.quote}"</p>
+                <h3 className="font-bold text-yellow-300">{testimonial.name}</h3>
+                <p className="text-sm text-gray-200">{testimonial.role}</p>
               </div>
             ))}
           </div>
