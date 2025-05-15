@@ -1,48 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 
-const images = [
-  { src: "/studio1.jpg", title: "Studio Vibe" },
-  { src: "/studio2.jpg", title: "Creative Space" },
-  { src: "/session1.jpg", title: "Recording Session" },
-  { src: "/artist1.jpg", title: "Bildad Ogweno" },
-  { src: "/artist2.png", title: "Joshua Mbere" },
-  { src: "/artist3.png", title: "Elijah Jalogo" },
-  { src: "/gear.jpg", title: "Top Gear" },
-  { src: "/mixing.jpg", title: "Mixing in Progress" },
-  { src: "/mixing1.jpg", title: "Another Mix" },
+const galleryImages = [
+  { src: "/studio1.jpg", title: "Studio Session", tags: ["Recording", "Live"] },
+  { src: "/studio2.jpg", title: "Creative Vibes", tags: ["Inspiration", "Vibes"] },
+  { src: "/session1.jpg", title: "Artist in Action", tags: ["Performance", "Energy"] },
+  { src: "/gear.jpg", title: "Studio Gear", tags: ["Equipment", "Tech"] },
+  { src: "/mixing.jpg", title: "Mixing in Progress", tags: ["Mixing", "Studio"] },
+  { src: "/lights.jpg", title: "Ambience", tags: ["Lighting", "Mood"] },
 ];
 
 const Gallery = () => {
-  const [index, setIndex] = useState(0);
-
-  // Auto-slide every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 5000); // 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section id="gallery" className="relative w-full h-screen overflow-hidden">
-      <AnimatePresence>
-        <motion.img
-          key={images[index].src}
-          src={images[index].src}
-          alt={images[index].title}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0.4, scale: 0.95 }}
-          transition={{ duration: 1 }}
-          className="absolute w-full h-full object-cover"
-        />
-      </AnimatePresence>
-
-      {/* Overlay title */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-6 py-3 rounded-lg text-xl font-semibold shadow-lg">
-        {images[index].title}
+    <section className="py-24 px-6 bg-white text-black">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold mb-14 text-gray-800">Studio Gallery</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {galleryImages.map((img, i) => (
+            <div key={i} className="rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+              <img src={img.src} alt={img.title} className="w-full h-64 object-cover" />
+              <div className="p-4 bg-gray-100">
+                <h3 className="text-lg font-semibold text-gray-900">{img.title}</h3>
+                <p className="text-sm text-gray-500">{img.tags.join(", ")}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
