@@ -16,38 +16,33 @@ const images = [
 const Gallery = () => {
   const [index, setIndex] = useState(0);
 
-  // Auto-slide every second
+  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 1000);
+    }, 5000); // 5 seconds
 
-    return () => clearInterval(interval); // cleanup
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section id="gallery" className="bg-black text-white py-16">
-      <h2 className="text-4xl font-bold text-center mb-10 text-yellow-400">
-        Gallery & Portfolio
-      </h2>
+    <section id="gallery" className="relative w-full h-screen overflow-hidden">
+      <AnimatePresence>
+        <motion.img
+          key={images[index].src}
+          src={images[index].src}
+          alt={images[index].title}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0.4, scale: 0.95 }}
+          transition={{ duration: 1 }}
+          className="absolute w-full h-full object-cover"
+        />
+      </AnimatePresence>
 
-      <div className="relative w-full max-w-5xl mx-auto h-[500px] overflow-hidden rounded-xl shadow-lg">
-        <AnimatePresence>
-          <motion.img
-            key={images[index].src}
-            src={images[index].src}
-            alt={images[index].title}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.8 }}
-            className="w-full h-full object-cover"
-          />
-        </AnimatePresence>
-
-        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 px-6 py-2 rounded text-white text-lg">
-          {images[index].title}
-        </div>
+      {/* Overlay title */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-6 py-3 rounded-lg text-xl font-semibold shadow-lg">
+        {images[index].title}
       </div>
     </section>
   );
