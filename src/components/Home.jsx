@@ -4,12 +4,12 @@ import Hero from "./Hero";
 
 const HomePage = () => {
   return (
-    <div className="bg-gradient-to-b from-slate-900 via-blue-800 to-blue-600 text-white overflow-x-hidden">
+    <div className="bg-white text-gray-900 overflow-x-hidden">
       {/* Hero Section */}
       <Hero />
 
       {/* Intro Section */}
-      <section className="py-24 px-6 bg-white text-gray-900">
+      <section className="py-24 px-6 bg-blue-50">
         <motion.div
           className="max-w-6xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -17,15 +17,15 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-extrabold mb-6 text-blue-800">Your Sound, Elevated</h2>
-          <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-            At Heavenly Rhythms, we blend cutting-edge technology with spiritual creativity to bring your sound to life. Whether you're recording your first gospel hit or mixing your 10th album, our studio is your sanctuary of sound.
+          <h2 className="text-4xl font-extrabold mb-6 text-blue-700">Your Sound, Elevated</h2>
+          <p className="text-lg max-w-3xl mx-auto leading-relaxed text-gray-700">
+            At Heavenly Rhythms, we blend cutting-edge tech with creative freedom to bring your sound to life. Whether you're recording your first gospel track or producing your next hit, we provide a sanctuary where sound meets soul.
           </p>
         </motion.div>
       </section>
 
       {/* Services */}
-      <section className="py-24 px-6 bg-blue-700">
+      <section className="py-24 px-6 bg-white">
         <motion.div
           className="max-w-6xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -33,41 +33,41 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-300">Our Core Services</h2>
+          <h2 className="text-4xl font-bold mb-14 text-blue-700">Our Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {[
               {
-                title: "Recording Studio",
-                desc: "Industry-standard vocal booths and hardware. Get clean, crisp sound with zero noise.",
+                title: "Studio Recording",
+                desc: "Capture your best vocals and instruments in a pro sound environment.",
               },
               {
-                title: "Mixing & Mastering",
-                desc: "From frequencies to fades, we shape your sound to professional perfection.",
+                title: "Mix & Master",
+                desc: "Finalize your track for streaming, radio, and live performance.",
               },
               {
-                title: "Beats & Production",
-                desc: "Need an exclusive gospel, afrobeats, or trap beat? We got you.",
+                title: "Custom Beats",
+                desc: "We cook gospel, Afrobeat, trap, drill — whatever fits your sound.",
               },
               {
                 title: "Voice Overs",
-                desc: "Radio, TV, YouTube intros, ads. Record quality voice overs with pristine clarity.",
+                desc: "Ad spots, intros, voice acting — smooth delivery, clean audio.",
               },
               {
                 title: "Artist Coaching",
-                desc: "One-on-one coaching to grow your vocal skills, stage presence, and confidence.",
+                desc: "We coach your voice, lyrics, and confidence in the booth and on stage.",
               },
               {
-                title: "Live Session Recording",
-                desc: "Full band recording with mic separation and studio monitoring.",
+                title: "Live Band Sessions",
+                desc: "Bring your whole crew. Full-band recording with perfect mic placement.",
               },
             ].map((service, i) => (
               <motion.div
                 key={i}
-                className="bg-white text-gray-900 p-6 rounded-2xl shadow-xl"
-                whileHover={{ scale: 1.05 }}
+                className="bg-blue-100 text-blue-900 p-6 rounded-xl shadow hover:shadow-lg hover:bg-blue-200 transition-all"
+                whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-xl font-bold mb-2 text-blue-800">{service.title}</h3>
+                <h3 className="text-lg font-bold mb-2">{service.title}</h3>
                 <p className="text-sm">{service.desc}</p>
               </motion.div>
             ))}
@@ -75,8 +75,8 @@ const HomePage = () => {
         </motion.div>
       </section>
 
-      {/* Studio Vibe Section */}
-      <section className="py-24 px-6 bg-white text-gray-900">
+      {/* Studio Feature Section */}
+      <section className="py-24 px-6 bg-blue-50">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ x: -100, opacity: 0 }}
@@ -84,7 +84,7 @@ const HomePage = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <img src="/gear.jpg" alt="Studio Gear" className="rounded-xl shadow-xl" />
+            <img src="/studio2.jpg" alt="Studio Vibe" className="rounded-xl shadow-xl" />
           </motion.div>
           <motion.div
             initial={{ x: 100, opacity: 0 }}
@@ -92,16 +92,16 @@ const HomePage = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-blue-800">Our Studio Vibe</h2>
-            <p className="text-lg leading-relaxed">
-              It's not just about sound — it’s about **energy**. Our studio is designed to inspire. With ambient lighting, a calm atmosphere, and top-tier equipment, you’ll create like never before.
+            <h2 className="text-3xl font-bold mb-4 text-blue-700">Creative Energy, Real Results</h2>
+            <p className="text-lg leading-relaxed text-gray-700">
+              Our space isn’t just pro-level — it’s built for creators to feel inspired. From lighting to layout, every corner is tuned to elevate your workflow. Bring the fire, we’ll capture the heat.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 px-6 bg-blue-800 text-white">
+      <section className="py-24 px-6 bg-white">
         <motion.div
           className="max-w-6xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -109,29 +109,29 @@ const HomePage = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold mb-14 text-yellow-300">What Artists Are Saying</h2>
+          <h2 className="text-4xl font-bold mb-14 text-blue-700">Client Testimonials</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {[
               {
-                quote: "Best mixing I’ve ever had. The track sounded better than I imagined.",
-                name: "Faith Mwangi",
+                quote: "Their energy and sound quality are unmatched. I keep coming back.",
+                name: "Joshua Kimani",
                 role: "Gospel Artist",
               },
               {
-                quote: "The vibe here is unmatched. You walk in nervous, walk out with a hit.",
-                name: "Kev Masterpiece",
-                role: "Afrobeat Producer",
+                quote: "Recording here leveled up my whole sound. It’s a vibe every time.",
+                name: "Diana Nduta",
+                role: "Singer/Songwriter",
               },
               {
-                quote: "They guided me from writing to mastering. A complete experience.",
-                name: "Sarah Wanjiru",
-                role: "New Artist",
+                quote: "Mixing was clean, fast, and professional. I’d recommend to any serious artist.",
+                name: "Terry Mbugua",
+                role: "Producer",
               },
             ].map((testimonial, i) => (
-              <div key={i} className="bg-blue-900 p-6 rounded-xl shadow-md">
+              <div key={i} className="bg-blue-100 p-6 rounded-xl shadow text-left">
                 <p className="italic mb-4 text-sm">"{testimonial.quote}"</p>
-                <h3 className="font-bold text-yellow-300">{testimonial.name}</h3>
-                <p className="text-sm text-gray-200">{testimonial.role}</p>
+                <h3 className="font-bold text-blue-800">{testimonial.name}</h3>
+                <p className="text-sm text-blue-600">{testimonial.role}</p>
               </div>
             ))}
           </div>
