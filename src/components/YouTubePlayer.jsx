@@ -6,36 +6,33 @@ const YouTubePlayer = () => {
   const [featuredVideo, setFeaturedVideo] = useState(null);
 
   const apiKey = "AIzaSyCPxpKS7PeKEvPGE-jWjoiuHQtZ498Lp_0";
-  const searchTerms = [
-    "Bildad Ogweno gospel songs",
-    "Joshua Mbere gospel songs",
-    "Elijah Jalogo gospel songs",
-  ];
+  const searchTerm = "Bildad Ogweno gospel songs";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     const fetchVideos = async () => {
       try {
-        let allVideos = [];
+        const res = await axios.get("https://www.googleapis.com/youtube/v3/search", {
+          params: {
+            part: "snippet",
+            q: searchTerm,
+            key: apiKey,
+            maxResults: 10,
+            type: "video",
+          },
+        });
 
-        for (const term of searchTerms) {
-          const res = await axios.get("https://www.googleapis.com/youtube/v3/search", {
-            params: {
-              part: "snippet",
-              q: term,
-              key: apiKey,
-              maxResults: 2,
-              type: "video",
-            },
-          });
-          allVideos = [...allVideos, ...res.data.items];
+        const fetchedVideos = res.data.items;
+        if (fetchedVideos.length > 0) {
+          setVideos(fetchedVideos);
+          setFeaturedVideo(fetchedVideos[0]);
+        } else {
+          setVideos([]);
+          setFeaturedVideo(null);
         }
-
-        setVideos(allVideos);
-        setFeaturedVideo(allVideos[0]); // First video is default featured
       } catch (error) {
-        console.error("Error fetching videos:", error);
+        console.error("❌ Error fetching videos:", error);
       }
     };
 
@@ -52,10 +49,12 @@ const YouTubePlayer = () => {
   );
 
   return (
-    <div className="pt-20 px-4">
-      <h2 className="text-3xl font-bold mb-6 text-center">Latest Gospel Songs</h2>
+    <div className="pt-20 px-4 bg-black text-white min-h-screen">
+      <h2 className="text-3xl font-bold mb-6 text-center text-yellow-400">
+        Bildad Ogweno's Gospel Songs
+      </h2>
 
-      {featuredVideo && (
+      {featuredVideo ? (
         <div className="mb-10">
           <div className="rounded overflow-hidden shadow-lg bg-gray-900">
             <iframe
@@ -72,6 +71,8 @@ const YouTubePlayer = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <p className="text-center text-gray-500">No videos found for Bildad Ogweno.</p>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
